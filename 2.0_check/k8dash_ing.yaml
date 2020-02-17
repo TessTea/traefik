@@ -1,0 +1,29 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: kube-system
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`traefik.dash.one`) && PathPrefix(`/admin`)
+    kind: Rule
+    services:
+    - name: k8dash
+      port: 80
+    middlewares:
+        - name: admin-stripprefix
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: admin-stripprefix
+  namespace: kube-system
+spec:
+  stripPrefix:
+    prefixes:
+      - /admin
+    forceSlash: false

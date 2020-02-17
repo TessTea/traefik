@@ -1,0 +1,19 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: "foo"
+  namespace: default
+
+spec:
+  rules:
+    - host: traefik.dash.one
+      http:
+        paths:
+          - path: /bar
+            backend:
+              serviceName: traefik
+              servicePort: 8080
+          - path: /foo
+            backend:
+              serviceName: service1
+              servicePort: 80
