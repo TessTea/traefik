@@ -9,7 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
 spec:
   rules:
-  - host: ticket.kino.kz
+  - host: traefik.example.com
     http:
       paths:
       - path: /dash
