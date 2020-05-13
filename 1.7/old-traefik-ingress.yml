@@ -1,27 +1,18 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-web-ui
-  namespace: traefik
-spec:
-  selector:
-    k8s-app: traefik-ingress-lb
-  ports:
-  - name: web
-    port: 80
-    targetPort: 8080
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: traefik-web-ui
-  namespace: traefik
+  name: k8dash
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
 spec:
   rules:
-  - host: traefik.dash.one
+  - host: ticket.kino.kz
     http:
       paths:
-      - path: /
+      - path: /dash
         backend:
-          serviceName: traefik-web-ui
-          servicePort: web
+          serviceName: k8dash
+          servicePort: 80
