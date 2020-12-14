@@ -29,6 +29,7 @@ spec:
           args:
             - --providers.kubernetesingress
             - --entrypoints.web.address=:80
+            - --entrypoints.web.http.redirections.entrypoint.to=websecure
             - --entrypoints.websecure.Address=:443
             - --api.insecure
             - --api.dashboard=true
