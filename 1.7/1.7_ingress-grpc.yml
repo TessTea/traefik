@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: grpc
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/protocol: h2c
+spec:
+  rules:
+    - host: check.my.lol
+      http:
+        paths: 
+         - path: /
+           backend:
+              serviceName: test-grpc
+              servicePort: 80
+

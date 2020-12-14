@@ -1,0 +1,33 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/traefik`)
+    kind: Rule
+    services:
+    - name: traefik
+      port: 8080
+
+
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: traefik-tls
+#   namespace: default
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#   - match: PathPrefix(`/traefik`)
+#     kind: Rule
+#     services:
+#     - name: traefik
+#       port: admin
+#   tls:
+#     certResolver: myresolver
